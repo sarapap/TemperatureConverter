@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/sarapap/ProgrammingProjectExercises1.git'
+                git 'https://github.com/sarapap/TemperatureConverter.git'
             }
         }
 
