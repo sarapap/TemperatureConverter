@@ -6,7 +6,7 @@ pipeline {
         DOCKERHUB_REPO = 'sarapap/temperatureconverter'
         DOCKER_IMAGE_TAG = 'latest'
         PATH = "/usr/local/opt/maven/bin:/usr/local/opt/maven/bin:$PATH"
-        PATH+EXTRA = "/path/to/docker"  // Korvaa oikealla Dockerin polulla
+        PATH+EXTRA = "/usr/local/bin/docker"
     }
 
     stages {
