@@ -11,7 +11,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the code from the GitHub repository
                 git 'https://github.com/sarapap/TemperatureConverter.git'
             }
         }
@@ -19,8 +18,8 @@ pipeline {
         stage('Check Docker Version') {
             steps {
                 script {
-                    // Check Docker version
-                    sh 'docker --version'
+                    // Check Docker version with updated PATH
+                    sh 'export PATH=$PATH:/usr/local/bin && docker --version'
                 }
             }
         }
