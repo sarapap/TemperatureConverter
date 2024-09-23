@@ -1,42 +1,38 @@
-
 pipeline {
-    agent any
+    agent any // IN THE LECTURE I WILL EXPLAIN THE SCRIPT AND THE WORKFLOW
 
+    environment {
+        // Define Docker Hub credentials ID
+        DOCKERHUB_CREDENTIALS_ID = 'sarapap'
+        // Define Docker Hub repository name
+        DOCKERHUB_REPO = 'sarapap/TemperatureConverter'
+        // Define Docker image tag
+        DOCKER_IMAGE_TAG = 'latest'
+    }
     stages {
         stage('Checkout') {
             steps {
+                // Checkout code from Git repository
                 git 'https://github.com/sarapap/TemperatureConverter.git'
             }
         }
-
-
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                withEnv(["PATH+EXTRA=/usr/local/opt/maven/bin:/bin:/usr/bin"]) {
-                    sh 'mvn clean install'
+                // Build Docker image
+                script {
+                    docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
                 }
             }
         }
-
-        stage('Test') {
+        stage('Push Docker Image to Docker Hub') {
             steps {
-                withEnv(["PATH+EXTRA=/usr/local/opt/maven/bin:/bin:/usr/bin"]) {
-                    sh 'mvn test'
+                // Push Docker image to Docker Hub
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
+                        docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                    }
                 }
             }
-        }
-
-        stage('Code Coverage') {
-            steps {
-                jacoco execPattern: '**/target/jacoco.exec'
-            }
-        }
-    }
-
-    post {
-        always {
-            junit '**/target/surefire-reports/*.xml'
-            jacoco execPattern: '**/target/jacoco.exec'
         }
     }
 }
