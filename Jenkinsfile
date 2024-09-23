@@ -5,18 +5,18 @@ pipeline {
         DOCKERHUB_CREDENTIALS_ID = 'sarapap'
         DOCKERHUB_REPO = 'sarapap/temperatureconverter'
         DOCKER_IMAGE_TAG = 'latest'
-        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/local/opt/maven/bin:$PATH"
+        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/local/opt/maven/bin"
     }
 
     stages {
-    stage('Debug Path') {
-        steps {
-            script {
-                sh 'echo $PATH'
-                sh 'ls -l /usr/local/bin/docker'
+        stage('Debug Path') {
+            steps {
+                script {
+                    sh 'echo $PATH'
+                    sh 'ls -l /usr/local/bin/docker'
+                }
             }
         }
-    }
 
         stage('Checkout') {
             steps {
@@ -27,8 +27,8 @@ pipeline {
         stage('Check Docker Version') {
             steps {
                 script {
-                    // Check Docker version with updated PATH
-                    sh 'export PATH=$PATH:/usr/local/bin && docker --version'
+                    // Check Docker version
+                    sh 'docker --version'
                 }
             }
         }
