@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS_ID = 'sarapap'
-        DOCKERHUB_REPO = 'sarapap/TemperatureConverter'
+        DOCKERHUB_REPO = 'sarapap/temperatureconverter'
         DOCKER_IMAGE_TAG = 'latest'
         // Adjust the PATH here for Docker and Maven
         PATH = "/usr/local/bin:/usr/bin:/bin:/usr/local/opt/maven/bin"
