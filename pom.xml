@@ -16,6 +16,7 @@
     </properties>
 
     <build>
+        <finalName>TemperatureConverter</finalName>
         <plugins>
             <!-- Compiler Plugin -->
             <plugin>
@@ -37,6 +38,20 @@
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
+                </configuration>
+            </plugin>
+
+            <!-- JAR Plugin for configuring the manifest file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>TemperatureConverter</mainClass> <!-- Correct main class -->
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
 
