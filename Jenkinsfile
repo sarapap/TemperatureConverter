@@ -21,7 +21,8 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    def image = docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                    def image = sh(script: '/usr/local/bin/docker build -t "${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}" .', returnStdout: true).trim()
+
                 }
             }
         }
