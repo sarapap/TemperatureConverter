@@ -27,8 +27,8 @@ pipeline {
         stage('Check Docker Version') {
             steps {
                 script {
-                    // Check Docker version
-                    sh 'docker --version'
+                    // Check Docker version with updated PATH
+                    sh 'export PATH=$PATH:/Applications/Docker.app/Contents/Resources/bin && docker --version'
                 }
             }
         }
