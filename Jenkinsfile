@@ -6,6 +6,7 @@ pipeline {
         DOCKERHUB_REPO = 'sarapap/temperatureconverter'
         DOCKER_IMAGE_TAG = 'latest'
         PATH = "$PATH:/path/to/docker"
+        }
 
     stages {
         stage('Checkout') {
