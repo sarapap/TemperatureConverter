@@ -9,6 +9,15 @@ pipeline {
     }
 
     stages {
+    stage('Debug Path') {
+        steps {
+            script {
+                sh 'echo $PATH'
+                sh 'ls -l /usr/local/bin/docker'
+            }
+        }
+    }
+
         stage('Checkout') {
             steps {
                 git 'https://github.com/sarapap/TemperatureConverter.git'
