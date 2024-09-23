@@ -5,8 +5,8 @@ pipeline {
         DOCKERHUB_CREDENTIALS_ID = 'sarapap'
         DOCKERHUB_REPO = 'sarapap/temperatureconverter'
         DOCKER_IMAGE_TAG = 'latest'
-        PATH = "$PATH:/path/to/docker"
-        }
+        PATH = "/usr/local/opt/maven/bin:/usr/local/opt/maven/bin:/path/to/docker:$PATH" // Oikea Docker-polku tähän
+    }
 
     stages {
         stage('Checkout') {
