@@ -1,13 +1,12 @@
 pipeline {
     agent any
 
-   environment {
-       DOCKERHUB_CREDENTIALS_ID = 'sarapap'
-       DOCKERHUB_REPO = 'sarapap/temperatureconverter'
-       DOCKER_IMAGE_TAG = 'latest'
-       PATH = "/usr/local/bin:/usr/bin:/bin:/usr/local/opt/maven/bin:$PATH"
-   }
-
+    environment {
+        DOCKERHUB_CREDENTIALS_ID = 'sarapap'
+        DOCKERHUB_REPO = 'sarapap/temperatureconverter'
+        DOCKER_IMAGE_TAG = 'latest'
+        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/local/opt/maven/bin:$PATH"
+    }
 
     stages {
         stage('Checkout') {
@@ -17,12 +16,21 @@ pipeline {
             }
         }
 
+        stage('Check Docker Version') {
+            steps {
+                script {
+                    // Check Docker version
+                    sh 'docker --version'
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
                     // Build the Docker image
-                    def image = sh(script: '/usr/local/bin/docker build -t "${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}" .', returnStdout: true).trim()
-
+                    def image = sh(script: 'docker build -t ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG} .', returnStdout: true).trim()
+                    echo "Built image: ${image}"
                 }
             }
         }
