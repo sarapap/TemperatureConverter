@@ -11,9 +11,16 @@ pipeline {
     stages {
         stage('Debug Path') {
             steps {
+            stage('Check Docker') {
+                        steps {
+                            sh 'which docker'
+                            sh 'docker --version'
+                        }
+                    }
                 script {
                     sh 'echo $PATH'
                     sh 'ls -l /usr/local/bin/docker'
+
                 }
             }
         }
@@ -27,7 +34,6 @@ pipeline {
         stage('Check Docker Version') {
             steps {
                 script {
-                    // Check Docker version with updated PATH
                     sh 'export PATH=$PATH:/Applications/Docker.app/Contents/Resources/bin && docker --version'
                 }
             }
