@@ -11,12 +11,6 @@ pipeline {
     stages {
         stage('Debug Path') {
             steps {
-            stage('Check Docker') {
-                        steps {
-                            sh 'which docker'
-                            sh 'docker --version'
-                        }
-                    }
                 script {
                     sh 'echo $PATH'
                     sh 'ls -l /usr/local/bin/docker'
@@ -24,6 +18,12 @@ pipeline {
                 }
             }
         }
+        stage('Check Docker') {
+                    steps {
+                        sh 'which docker'
+                        sh 'docker --version'
+                    }
+                }
 
         stage('Checkout') {
             steps {
