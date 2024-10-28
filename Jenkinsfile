@@ -31,8 +31,8 @@ pipeline {
                                                          passwordVariable: 'DOCKER_PASS')]) {
                             sh """
                                 docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-                                docker build -t ${DOCKER_USER}/temperatureconverter:version10000 .
-                                docker push ${DOCKER_USER}/temperatureconverter:version10000
+                                docker build -t ${DOCKER_USER}/temperatureconverter:latest .
+                                docker push ${DOCKER_USER}/temperatureconverter:latest
                                 docker logout
                             """
                         }
