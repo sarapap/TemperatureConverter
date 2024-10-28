@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Adding Docker's path to the environment
-                    withEnv(["PATH=/usr/local/bin:/usr/bin:/bin"]) {
+                    withEnv(["PATH+EXTRA=/usr/local/bin:/bin"]) {
                         docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
                     }
                 }
@@ -25,7 +25,7 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    withEnv(["PATH=/usr/local/bin:/usr/bin:/bin"]) {
+                    withEnv(["PATH+EXTRA=/usr/local/bin:/bin"]) {
                         withCredentials([usernamePassword(credentialsId: 'docker_creds',
                                                          usernameVariable: 'DOCKER_USER',
                                                          passwordVariable: 'DOCKER_PASS')]) {
